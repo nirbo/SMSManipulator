@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="org.nirbo.smsmanipulator.MainActivity" >
+
+    <item android:id="@+id/action_quit"
+        android:icon="@android:drawable/ic_lock_power_off"
+        android:title="@string/quit_app"
+        android:showAsAction="always"
+        android:onClick="onQuitClick">
+    </item>
+
+
+</menu>

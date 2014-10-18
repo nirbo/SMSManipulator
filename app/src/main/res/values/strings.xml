@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SMS Manipulator</string>
+    <string name="action_settings">Settings</string>
+    <string name="quit_app">Quit</string>
+
+    <string name="main_title">SMS Manipulator</string>
+
+
+</resources>
