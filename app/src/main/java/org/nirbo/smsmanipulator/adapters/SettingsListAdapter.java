@@ -44,7 +44,7 @@ public class SettingsListAdapter extends ArrayAdapter<String> {
     }
 
 
-    
+
     private class ListViewHolder {
 
         TextView settingName;

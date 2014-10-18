@@ -4,16 +4,21 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.nirbo.smsmanipulator.R;
 import org.nirbo.smsmanipulator.adapters.SettingsListAdapter;
 
-public class SettingsFragment extends Fragment {
+public class SettingsFragment extends Fragment implements AdapterView.OnItemClickListener {
+
+    final String targetsFragmentTag = "targetsFragment";
 
     Context context;
     String[] settingNames;
@@ -33,10 +38,15 @@ public class SettingsFragment extends Fragment {
         listView = (ListView) settingsList.findViewById(R.id.settings_listview);
         SettingsListAdapter listAdapter = new SettingsListAdapter(context, settingNames, settingDescriptions);
         listView.setAdapter(listAdapter);
+        listView.setOnItemClickListener(this);
 
         return settingsList;
     }
 
-
+    @Override
+    public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
+        String row = adapter.getItemAtPosition(position).toString();
+        Toast.makeText(context, row, Toast.LENGTH_LONG).show();
+    }
 
 }
