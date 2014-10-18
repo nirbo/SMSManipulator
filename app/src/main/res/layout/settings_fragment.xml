@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <TextView
+    <ListView
+        android:id="@+id/settings_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Settings">
-    </TextView>
+        android:padding="5dp"
+        android:divider="@color/teal_dark"
+        android:dividerHeight="1dp"
+        android:listSelector="@drawable/settings_list_row_selector">
+    </ListView>
 
 </LinearLayout>

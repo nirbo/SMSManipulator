@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="settingNames">
+        <item>Forwarding Targets</item>
+    </string-array>
+
+    <string-array name="settingDescriptions">
+        <item>Add, edit, or remove forwarding targets</item>
+    </string-array>
+
+</resources>

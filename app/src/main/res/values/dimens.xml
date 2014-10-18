@@ -6,4 +6,7 @@
     <dimen name="main_title">24dp</dimen>
     <dimen name="normal_text">18dp</dimen>
     <dimen name="tabs_text">16dp</dimen>
+
+    <dimen name="setting_name">18dp</dimen>
+    <dimen name="setting_description">14dp</dimen>
 </resources>
