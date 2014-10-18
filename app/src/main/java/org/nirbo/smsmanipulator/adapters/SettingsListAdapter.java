@@ -25,14 +25,34 @@ public class SettingsListAdapter extends ArrayAdapter<String> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View settingsRow = inflater.inflate(R.layout.settings_list_row, parent, false);
-        TextView settingName = (TextView) settingsRow.findViewById(R.id.setting_name);
-        TextView settingDescription = (TextView) settingsRow.findViewById(R.id.setting_description);
+        View settingsRow = convertView;
+        ListViewHolder viewHolder = null;
 
-        settingName.setText(settingNames[position]);
-        settingDescription.setText(settingDescriptions[position]);
+        if (settingsRow == null) {
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            settingsRow = inflater.inflate(R.layout.settings_list_row, parent, false);
+            viewHolder = new ListViewHolder(settingsRow);
+            settingsRow.setTag(viewHolder);
+        } else {
+            viewHolder = (ListViewHolder) settingsRow.getTag();
+        }
+
+        viewHolder.settingName.setText(settingNames[position]);
+        viewHolder.settingDescription.setText(settingDescriptions[position]);
 
         return settingsRow;
+    }
+
+
+    
+    private class ListViewHolder {
+
+        TextView settingName;
+        TextView settingDescription;
+
+        protected ListViewHolder(View view) {
+            settingName = (TextView) view.findViewById(R.id.setting_name);
+            settingDescription = (TextView) view.findViewById(R.id.setting_description);
+        }
     }
 }
