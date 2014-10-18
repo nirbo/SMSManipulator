@@ -3,11 +3,10 @@
     tools:context="org.nirbo.smsmanipulator.MainActivity" >
 
     <item android:id="@+id/action_quit"
-        android:icon="@android:drawable/ic_lock_power_off"
         android:title="@string/quit_app"
-        android:showAsAction="always"
+        android:showAsAction="always|withText"
+        android:icon="@android:drawable/ic_lock_power_off"
         android:onClick="onQuitClick">
     </item>
-
 
 </menu>
