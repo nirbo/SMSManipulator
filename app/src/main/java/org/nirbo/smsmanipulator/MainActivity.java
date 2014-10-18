@@ -4,6 +4,9 @@ import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import org.nirbo.smsmanipulator.adapters.SlidingTabsAdapter;
 
@@ -21,11 +24,11 @@ public class MainActivity extends FragmentActivity {
         initTabStrip();
     }
 
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.main, menu);
-//        return true;
-//    }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
+        return true;
+    }
 
     private void initActionBar() {
         mActionBar = getActionBar();
@@ -37,7 +40,7 @@ public class MainActivity extends FragmentActivity {
         viewPager.setAdapter(new SlidingTabsAdapter(getSupportFragmentManager()));
     }
 
-    public void onQuitClick() {
+    public void onQuitClick(MenuItem menuItem) {
         this.finish();
     }
 }
