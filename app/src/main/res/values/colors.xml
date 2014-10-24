@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <color name="material_teal_500">#009688</color>
+    <color name="material_teal_700">#00796b</color>
+    <color name="material_teal_800">#00695c</color>
+    <color name="material_teal_900">#004d40</color>
+    <color name="material_teal_accent_700">#00bfa5</color>
+    <color name="material_divider_alpha_12">#1f000000</color>
+    <color name="material_black_alpha_100">#00000000</color>
+
     <!-- Scheme ID: 3l51Tw0w0w0w0 -->
     <color name="teal_darkest">#015965</color>
     <color name="teal_dark">#1F6B75</color>

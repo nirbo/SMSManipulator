@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string-array name="navDrawerTitles">
+        <item>Home</item>
+        <item>Settings</item>
+        <item>Quit</item>
+    </string-array>
+
     <string-array name="settingNames">
         <item>Forwarding Targets</item>
     </string-array>
