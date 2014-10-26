@@ -70,11 +70,9 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void initHomeFragment() {
-        Fragment homeFragment = new HomeFragment();
-        FragmentManager fm = getFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.add(R.id.main_container, homeFragment);
-        ft.commit();
+        getFragmentManager().beginTransaction()
+                .add(R.id.main_container, new HomeFragment())
+                .commit();
     }
 
     @Override
