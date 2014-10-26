@@ -1,16 +1,17 @@
 package org.nirbo.smsmanipulator.listeners;
 
 import android.app.Activity;
-
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 
 import org.nirbo.smsmanipulator.R;
+import org.nirbo.smsmanipulator.fragments.HomeFragment;
+import org.nirbo.smsmanipulator.fragments.SettingsFragment;
 
 public class NavDrawerOnItemClickListener implements AdapterView.OnItemClickListener{
 
@@ -28,19 +29,38 @@ public class NavDrawerOnItemClickListener implements AdapterView.OnItemClickList
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parentView, View view, int position, long id) {
-        String itemLabel = parentView.getItemAtPosition(position).toString();
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        String itemLabel = parent.getItemAtPosition(position).toString();
+        Fragment fragment = null;
 
-        if (! "Quit".equals(itemLabel)) {
-            selectDrawerItem(position);
-        } else {
-            mContext.finish();
+        switch (position) {
+            case 0:
+                fragment = new HomeFragment();
+                break;
+
+            case 1:
+                fragment = new SettingsFragment();
+                break;
+
+            case 2:
+                mContext.finish();
+
+            default:
+                break;
         }
 
+        if (fragment != null) {
+            FragmentManager fm = mContext.getFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.replace(R.id.main_container, fragment);
+            ft.commit();
 
+            selectDrawerItem(position, parent);
+        }
     }
 
-    public void selectDrawerItem(int position) {
+    public void selectDrawerItem(int position, AdapterView<?> parent) {
+        parent.setSelection(position);
         setToolbarTitle(mToolbar, mDrawerEntries[position]);
         mNavDrawer.closeDrawers();
     }

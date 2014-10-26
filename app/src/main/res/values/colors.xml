@@ -6,7 +6,9 @@
     <color name="material_teal_800">#00695c</color>
     <color name="material_teal_900">#004d40</color>
     <color name="material_teal_accent_700">#00bfa5</color>
+    <color name="material_divider_alpha_5">#0d000000</color>
     <color name="material_divider_alpha_12">#1f000000</color>
+    <color name="material_divider_alpha_28">#47000000</color>
     <color name="material_black_alpha_100">#00000000</color>
 
     <!-- Scheme ID: 3l51Tw0w0w0w0 -->

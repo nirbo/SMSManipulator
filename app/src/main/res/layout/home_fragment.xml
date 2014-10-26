@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_marginTop="?android:attr/actionBarSize"
     android:padding="5dp"
     tools:context="org.nirbo.smsmanipulator.fragments.HomeFragment">
 
@@ -13,6 +14,7 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:padding="10dp"
+        android:textColor="@color/White"
         android:text="@string/main_title"
         android:textSize="@dimen/main_title">
     </TextView>
