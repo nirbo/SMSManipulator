@@ -1,34 +1,40 @@
-<android.support.v4.widget.DrawerLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
+    android:id="@+id/main_root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:elevation="3dp"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <FrameLayout
-        android:id="@+id/main_container"
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar">
+    </include>
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/material_teal_900">
+        android:elevation="3dp">
 
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/toolbar">
-        </include>
-    </FrameLayout>
+        <FrameLayout
+            android:id="@+id/main_container"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:background="@color/material_teal_900">
+        </FrameLayout>
 
-    <ListView
-        android:id="@+id/drawer_list"
-        android:layout_width="240dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="left"
-        android:background="?attr/colorPrimaryDark"
-        android:choiceMode="singleChoice"
-        android:layout_marginTop="?android:attr/actionBarSize"
-        android:divider="@drawable/nav_drawer_list_divider"
-        android:dividerHeight="1dp">
-    </ListView>
+        <ListView
+            android:id="@+id/drawer_list"
+            android:layout_width="240dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:background="?attr/colorPrimaryDark"
+            android:choiceMode="singleChoice"
+            android:divider="@drawable/nav_drawer_list_divider"
+            android:dividerHeight="1dp">
+        </ListView>
+    </android.support.v4.widget.DrawerLayout>
 
-</android.support.v4.widget.DrawerLayout>
+</LinearLayout>
