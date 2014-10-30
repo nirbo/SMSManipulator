@@ -53,6 +53,7 @@ public class NavDrawerOnItemClickListener implements AdapterView.OnItemClickList
             FragmentManager fm = mContext.getFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
             ft.replace(R.id.main_container, fragment);
+            ft.addToBackStack(null);
             ft.commit();
 
             selectDrawerItem(position, parent);

@@ -1,5 +1,6 @@
 package org.nirbo.smsmanipulator;
 
+import android.app.FragmentManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -24,6 +25,8 @@ public class MainActivity extends ActionBarActivity {
     private String[] mDrawerEntries;
     private NavDrawerOnItemClickListener mNavDrawerItemListener;
     private ActionBarDrawerToggle mDrawerListener;
+
+    private FragmentManager fm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +94,17 @@ public class MainActivity extends ActionBarActivity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         mDrawerListener.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public void onBackPressed() {
+        fm = getFragmentManager();
+
+        if (fm.getBackStackEntryCount() != 0) {
+            fm.popBackStackImmediate();
+        } else {
+            super.onBackPressed();
+        }
     }
 
 }
