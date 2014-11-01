@@ -10,6 +10,8 @@ import org.nirbo.smsmanipulator.R;
 
 public class HomeFragment extends Fragment {
 
+    public static final String FRAGMENT_TAG = "home";
+
     public HomeFragment() {}
 
     @Override

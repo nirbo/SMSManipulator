@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
@@ -25,7 +26,6 @@ public class MainActivity extends ActionBarActivity {
     private String[] mDrawerEntries;
     private NavDrawerOnItemClickListener mNavDrawerItemListener;
     private ActionBarDrawerToggle mDrawerListener;
-
     private FragmentManager fm;
 
     @Override
@@ -33,6 +33,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
+        fm = getFragmentManager();
         hideStatusBar();
         initToolbar();
         initNavDrawer();
@@ -71,8 +72,10 @@ public class MainActivity extends ActionBarActivity {
 
     private void initHomeFragment() {
         getFragmentManager().beginTransaction()
-                .add(R.id.main_container, new HomeFragment())
+                .add(R.id.main_container, new HomeFragment(), HomeFragment.FRAGMENT_TAG)
                 .commit();
+
+//        fm.popBackStackImmediate(0, 0);
     }
 
     @Override
@@ -98,9 +101,7 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public void onBackPressed() {
-        fm = getFragmentManager();
-
-        if (fm.getBackStackEntryCount() != 0) {
+        if (fm.getBackStackEntryCount() > 0) {
             fm.popBackStackImmediate();
         } else {
             super.onBackPressed();
