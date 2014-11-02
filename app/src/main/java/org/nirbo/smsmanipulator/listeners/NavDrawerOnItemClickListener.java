@@ -6,17 +6,15 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ListView;
 
-import org.nirbo.smsmanipulator.MainActivity;
 import org.nirbo.smsmanipulator.R;
 import org.nirbo.smsmanipulator.fragments.HomeFragment;
 import org.nirbo.smsmanipulator.fragments.SettingsFragment;
 
-public class NavDrawerOnItemClickListener implements AdapterView.OnItemClickListener,
-        FragmentManager.OnBackStackChangedListener {
+public class NavDrawerOnItemClickListener implements AdapterView.OnItemClickListener {
 
     private Activity mContext;
     private String[] mDrawerEntries;
@@ -32,13 +30,17 @@ public class NavDrawerOnItemClickListener implements AdapterView.OnItemClickList
 
         mNavDrawer = (DrawerLayout) context.findViewById(R.id.drawer_layout);
         fm = mContext.getFragmentManager();
-        fm.addOnBackStackChangedListener(this);
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        selectDrawerItem(position, parent);
+    }
+
+    public void selectDrawerItem(int position, AdapterView<?> parent) {
         Fragment fragment = null;
         String fragmentTag = null;
+        ListView drawerList = (ListView) parent.findViewById(R.id.drawer_list);
 
         switch (position) {
             case 0:
@@ -60,25 +62,12 @@ public class NavDrawerOnItemClickListener implements AdapterView.OnItemClickList
 
         if (fragment != null) {
             ft = fm.beginTransaction();
-            replaceFragment(fragment, fragmentTag);
-            selectDrawerItem(position, parent);
-        }
-    }
-
-    public void selectDrawerItem(int position, AdapterView<?> parent) {
-        parent.setSelection(position);
-        setToolbarTitle(mToolbar, mDrawerEntries[position]);
-        mNavDrawer.closeDrawers();
-    }
-
-    private void replaceFragment(Fragment fragment, String tag) {
-        String fragmentName = fragment.getClass().getName();
-        boolean fragmentPopped = fm.popBackStackImmediate(fragmentName, 0);
-
-        if (! fragmentPopped) {
-            ft.replace(R.id.main_container, fragment, tag);
-            ft.addToBackStack(fragmentName);
+            ft.replace(R.id.main_container, fragment, fragmentTag);
             ft.commit();
+
+            drawerList.setItemChecked(position, true);
+            setToolbarTitle(mToolbar, mDrawerEntries[position]);
+            mNavDrawer.closeDrawers();
         }
     }
 
@@ -86,11 +75,5 @@ public class NavDrawerOnItemClickListener implements AdapterView.OnItemClickList
         toolbar.setTitle(title);
     }
 
-    @Override
-    public void onBackStackChanged() {
-        int backStackCount = fm.getBackStackEntryCount();
-
-        Log.d("NIR", "Count: " + backStackCount);
-    }
 
 }

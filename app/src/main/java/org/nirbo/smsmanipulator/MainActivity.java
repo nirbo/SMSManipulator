@@ -74,8 +74,6 @@ public class MainActivity extends ActionBarActivity {
         getFragmentManager().beginTransaction()
                 .add(R.id.main_container, new HomeFragment(), HomeFragment.FRAGMENT_TAG)
                 .commit();
-
-//        fm.popBackStackImmediate(0, 0);
     }
 
     @Override
