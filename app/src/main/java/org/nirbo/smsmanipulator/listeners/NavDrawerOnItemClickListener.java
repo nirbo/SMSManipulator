@@ -62,17 +62,15 @@ public class NavDrawerOnItemClickListener implements AdapterView.OnItemClickList
 
         if (fragment != null) {
             ft = fm.beginTransaction();
+            ft.setCustomAnimations(R.anim.fade_in_fragment, R.anim.fade_out_fragment);
             ft.replace(R.id.main_container, fragment, fragmentTag);
             ft.commit();
 
             drawerList.setItemChecked(position, true);
-            setToolbarTitle(mToolbar, mDrawerEntries[position]);
+            drawerList.setSelection(position);
+            mToolbar.setTitle(mDrawerEntries[position]);
             mNavDrawer.closeDrawer(mContext.findViewById(R.id.drawer_list));
         }
-    }
-
-    public void setToolbarTitle(Toolbar toolbar, String title) {
-        toolbar.setTitle(title);
     }
 
 
