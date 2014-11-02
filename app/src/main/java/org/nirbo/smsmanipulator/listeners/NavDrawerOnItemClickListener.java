@@ -67,7 +67,7 @@ public class NavDrawerOnItemClickListener implements AdapterView.OnItemClickList
 
             drawerList.setItemChecked(position, true);
             setToolbarTitle(mToolbar, mDrawerEntries[position]);
-            mNavDrawer.closeDrawers();
+            mNavDrawer.closeDrawer(mContext.findViewById(R.id.drawer_list));
         }
     }
 

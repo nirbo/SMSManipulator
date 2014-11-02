@@ -114,11 +114,9 @@ public class MainActivity extends ActionBarActivity {
             } else {
                 mDrawerLayout.closeDrawer(mDrawerListView);
             }
-
-            return true;
         }
 
-        return super.onKeyDown(keyCode, event);
+        return true;
     }
 
 }
