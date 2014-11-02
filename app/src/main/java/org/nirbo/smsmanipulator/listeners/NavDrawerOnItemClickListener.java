@@ -21,7 +21,6 @@ public class NavDrawerOnItemClickListener implements AdapterView.OnItemClickList
     private Toolbar mToolbar;
     private DrawerLayout mNavDrawer;
     private FragmentManager fm;
-    private FragmentTransaction ft;
 
     public NavDrawerOnItemClickListener(Activity context, String[] drawerEntries, Toolbar toolbar) {
         this.mContext = context;
@@ -34,10 +33,10 @@ public class NavDrawerOnItemClickListener implements AdapterView.OnItemClickList
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        selectDrawerItem(position, parent);
+        selectDrawerItem(position, parent, view);
     }
 
-    public void selectDrawerItem(int position, AdapterView<?> parent) {
+    public void selectDrawerItem(int position, AdapterView<?> parent, View item) {
         Fragment fragment = null;
         String fragmentTag = null;
         ListView drawerList = (ListView) parent.findViewById(R.id.drawer_list);
@@ -61,13 +60,14 @@ public class NavDrawerOnItemClickListener implements AdapterView.OnItemClickList
         }
 
         if (fragment != null) {
-            ft = fm.beginTransaction();
+            FragmentTransaction ft = fm.beginTransaction();
             ft.setCustomAnimations(R.anim.fade_in_fragment, R.anim.fade_out_fragment);
             ft.replace(R.id.main_container, fragment, fragmentTag);
             ft.commit();
 
-            drawerList.setItemChecked(position, true);
+            item.setSelected(true);
             drawerList.setSelection(position);
+            drawerList.setItemChecked(position, true);
             mToolbar.setTitle(mDrawerEntries[position]);
             mNavDrawer.closeDrawer(mContext.findViewById(R.id.drawer_list));
         }
