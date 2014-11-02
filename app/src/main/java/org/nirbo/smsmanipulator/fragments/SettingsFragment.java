@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -57,7 +58,6 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemClic
         list.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(mContext);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
-
         list.setLayoutManager(llm);
 
         itemsList = initViewItems(mSettingNames, mSettingDescriptions);

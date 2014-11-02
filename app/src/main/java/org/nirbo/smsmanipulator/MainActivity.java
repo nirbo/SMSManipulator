@@ -106,4 +106,19 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_MENU) {
+            if (! mDrawerLayout.isDrawerOpen(mDrawerListView)) {
+                mDrawerLayout.openDrawer(mDrawerListView);
+            } else {
+                mDrawerLayout.closeDrawer(mDrawerListView);
+            }
+
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
+
 }
