@@ -61,7 +61,7 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemClic
         list.setLayoutManager(llm);
 
         itemsList = initViewItems(mSettingNames, mSettingDescriptions);
-        SettingsRecyclerAdapter adapter = new SettingsRecyclerAdapter(itemsList);
+        SettingsRecyclerAdapter adapter = new SettingsRecyclerAdapter(itemsList, mContext);
         list.setAdapter(adapter);
     }
 
