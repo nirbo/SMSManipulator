@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.nirbo.smsmanipulator.MainActivity;
 import org.nirbo.smsmanipulator.R;
 import org.nirbo.smsmanipulator.UI.SettingsFragmentRow;
 
@@ -31,10 +30,10 @@ public class SettingsRecyclerAdapter extends RecyclerView.Adapter<SettingsRecycl
                 .inflate(R.layout.settings_recycler_card, parent, false);
 
         SettingsViewHolder viewHolder = new SettingsViewHolder(itemView,
-                new SettingsViewHolder.ISettingsRecyclerClicks() {
+                new SettingsViewHolder.OnItemClickListener() {
 
             @Override
-            public void OnItemClick(View item) {
+            public void OnItemClick(View item, int position) {
                 Toast.makeText(mContext, "Item Clicked: " + position, Toast.LENGTH_SHORT).show();
             }
         });
@@ -60,26 +59,24 @@ public class SettingsRecyclerAdapter extends RecyclerView.Adapter<SettingsRecycl
 
         protected TextView mSettingName;
         protected TextView mSettingDescription;
-        protected ISettingsRecyclerClicks mItemClickListener;
-        protected CardView mCardView;
+        protected OnItemClickListener mItemClickListener;
 
-        public SettingsViewHolder(View itemView, ISettingsRecyclerClicks itemClickListener) {
+        public SettingsViewHolder(View itemView, OnItemClickListener itemClickListener) {
             super(itemView);
             mSettingName = (TextView) itemView.findViewById(R.id.setting_name);
             mSettingDescription = (TextView) itemView.findViewById(R.id.setting_description);
-            mCardView = (CardView) itemView.findViewById(R.id.settings_row_cardview);
-
             mItemClickListener = itemClickListener;
-            mCardView.setOnClickListener(this);
+
+            itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            mItemClickListener.OnItemClick(view);
+            mItemClickListener.OnItemClick(view, getPosition());
         }
 
-        public static interface ISettingsRecyclerClicks {
-            public void OnItemClick(View item);
+        public static interface OnItemClickListener {
+            public void OnItemClick(View item, int position);
         }
     }
 
