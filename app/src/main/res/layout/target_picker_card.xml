@@ -36,8 +36,7 @@
                 android:textStyle="bold"
                 android:text="Test"
                 android:textColor="@color/White"
-                android:layout_marginBottom="1dp"
-                android:paddingLeft="3dp">
+                android:layout_marginBottom="1dp">
             </TextView>
 
             <TextView
@@ -46,8 +45,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/contact_number"
                 android:text="Test"
-                android:textColor="@color/DarkGray"
-                android:paddingLeft="3dp">
+                android:textColor="@color/DarkGray">
             </TextView>
         </LinearLayout>
     </LinearLayout>
