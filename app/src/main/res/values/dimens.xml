@@ -9,4 +9,7 @@
 
     <dimen name="setting_name">18dp</dimen>
     <dimen name="setting_description">14dp</dimen>
+
+    <dimen name="contact_name">18dp</dimen>
+    <dimen name="contact_number">14dp</dimen>
 </resources>
