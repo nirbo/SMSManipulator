@@ -14,11 +14,16 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.j256.ormlite.android.apptools.OpenHelperManager;
+
+import org.nirbo.smsmanipulator.dao.DBHelper;
 import org.nirbo.smsmanipulator.fragments.HomeFragment;
 import org.nirbo.smsmanipulator.listeners.NavDrawerOnItemClickListener;
 import org.nirbo.smsmanipulator.listeners.NavDrawerToggleListener;
 
 public class MainActivity extends ActionBarActivity {
+
+    public static DBHelper dbHelper;
 
     private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
@@ -34,6 +39,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.main_activity);
 
         fm = getFragmentManager();
+        dbHelper = getDBHelper();
         hideStatusBar();
         initToolbar();
         initNavDrawer();
@@ -74,6 +80,14 @@ public class MainActivity extends ActionBarActivity {
         getFragmentManager().beginTransaction()
                 .add(R.id.main_container, new HomeFragment(), HomeFragment.FRAGMENT_TAG)
                 .commit();
+    }
+
+    private DBHelper getDBHelper() {
+        if (dbHelper == null) {
+            dbHelper = OpenHelperManager.getHelper(this, DBHelper.class);
+        }
+
+        return dbHelper;
     }
 
     @Override
@@ -121,4 +135,12 @@ public class MainActivity extends ActionBarActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (dbHelper != null) {
+            OpenHelperManager.releaseHelper();
+            dbHelper = null;
+        }
+    }
 }

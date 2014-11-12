@@ -8,21 +8,32 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.j256.ormlite.dao.DaoManager;
+import com.j256.ormlite.dao.RuntimeExceptionDao;
+
+import org.nirbo.smsmanipulator.MainActivity;
 import org.nirbo.smsmanipulator.R;
-import org.nirbo.smsmanipulator.UI.SettingsFragmentRow;
+import org.nirbo.smsmanipulator.dao.DBHelper;
 import org.nirbo.smsmanipulator.model.Target;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class TargetPickerRecyclerAdapter
         extends RecyclerView.Adapter<TargetPickerRecyclerAdapter.TargetsViewHolder> {
 
+    private DBHelper dbHelper;
     private Activity mContext;
     private List<Target> mTargets;
+    private RuntimeExceptionDao targetDao;
 
-    public TargetPickerRecyclerAdapter(List<Target> targets, Activity context) {
+    public TargetPickerRecyclerAdapter(Activity context) {
+        targetDao = null;
+        targetDao = dbHelper.getTargetExceptionDao();
+
+        this.dbHelper = MainActivity.dbHelper;
         this.mContext = context;
-        this.mTargets = targets;
+        this.mTargets = targetDao.queryForAll();
     }
 
     @Override
@@ -45,8 +56,8 @@ public class TargetPickerRecyclerAdapter
     @Override
     public void onBindViewHolder(TargetsViewHolder targetsViewHolder, int position) {
         Target target = mTargets.get(position);
-        targetsViewHolder.mTargetName.setText(target.getSettingName());
-        targetsViewHolder.mTargetNumber.setText(target.getSettingDescription());
+        targetsViewHolder.mTargetName.setText(target.getContactName());
+        targetsViewHolder.mTargetNumber.setText(target.getContactNumber());
     }
 
     @Override

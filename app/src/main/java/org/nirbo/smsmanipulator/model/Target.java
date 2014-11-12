@@ -30,4 +30,28 @@ public class Target extends ModelBase {
                 ", forwardActive=" + forwardActive +
                 '}';
     }
+
+    public String getContactName() {
+        return contactName;
+    }
+
+    public void setContactName(String contactName) {
+        this.contactName = contactName;
+    }
+
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
+    }
+
+    public Boolean getForwardActive() {
+        return forwardActive;
+    }
+
+    public void setForwardActive(Boolean forwardActive) {
+        this.forwardActive = forwardActive;
+    }
 }
