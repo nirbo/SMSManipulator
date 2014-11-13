@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 
 import org.nirbo.smsmanipulator.MainActivity;
@@ -16,7 +15,6 @@ import org.nirbo.smsmanipulator.R;
 import org.nirbo.smsmanipulator.dao.DBHelper;
 import org.nirbo.smsmanipulator.model.Target;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class TargetPickerRecyclerAdapter
@@ -28,11 +26,17 @@ public class TargetPickerRecyclerAdapter
     private RuntimeExceptionDao targetDao;
 
     public TargetPickerRecyclerAdapter(Activity context) {
+        this.dbHelper = MainActivity.dbHelper;
+        this.mContext = context;
+
         targetDao = null;
         targetDao = dbHelper.getTargetExceptionDao();
 
-        this.dbHelper = MainActivity.dbHelper;
-        this.mContext = context;
+        Target test = new Target();
+        test.setContactName("TEST 1");
+        test.setContactNumber("12345678");
+        targetDao.create(test);
+
         this.mTargets = targetDao.queryForAll();
     }
 
@@ -75,8 +79,8 @@ public class TargetPickerRecyclerAdapter
 
         public TargetsViewHolder(View itemView, OnItemClickListener itemClickListener) {
             super(itemView);
-            mTargetName = (TextView) itemView.findViewById(R.id.setting_name);
-            mTargetNumber = (TextView) itemView.findViewById(R.id.setting_description);
+            mTargetName = (TextView) itemView.findViewById(R.id.target_picker_name);
+            mTargetNumber = (TextView) itemView.findViewById(R.id.target_picker_number);
             mItemClickListener = itemClickListener;
 
             itemView.setOnClickListener(this);

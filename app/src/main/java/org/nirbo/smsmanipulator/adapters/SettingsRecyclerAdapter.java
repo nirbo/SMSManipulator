@@ -1,7 +1,9 @@
 package org.nirbo.smsmanipulator.adapters;
 
 import android.app.Activity;
-import android.support.v7.widget.CardView;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.Toast;
 
 import org.nirbo.smsmanipulator.R;
 import org.nirbo.smsmanipulator.UI.SettingsFragmentRow;
+import org.nirbo.smsmanipulator.fragments.TargetsFragment;
 
 import java.util.List;
 
@@ -32,8 +35,24 @@ public class SettingsRecyclerAdapter extends RecyclerView.Adapter<SettingsRecycl
         SettingsViewHolder viewHolder = new SettingsViewHolder(itemView,
                 new SettingsViewHolder.OnItemClickListener() {
 
+            Fragment fragment = null;
+            String fragmentTag = null;
+
             @Override
             public void OnItemClick(View item, int position) {
+                switch (position) {
+                    case 0:
+                        fragment = new TargetsFragment();
+                        fragmentTag = TargetsFragment.FRAGMENT_TAG;
+
+                    case 1:
+                        break;
+
+                    default:
+                        break;
+                }
+
+                loadTargetsFragment(fragment, fragmentTag);
                 Toast.makeText(mContext, "Item Clicked: " + position, Toast.LENGTH_SHORT).show();
             }
         });
@@ -51,6 +70,16 @@ public class SettingsRecyclerAdapter extends RecyclerView.Adapter<SettingsRecycl
     @Override
     public int getItemCount() {
         return mSettingsRows.size();
+    }
+
+    public void loadTargetsFragment(Fragment fragment, String fragmentTag) {
+        if (fragment != null) {
+            FragmentManager fm = mContext.getFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.setCustomAnimations(R.anim.fade_in_fragment, R.anim.fade_out_fragment);
+            ft.replace(R.id.main_container, fragment, fragmentTag);
+            ft.commit();
+        }
     }
 
     // ViewHolder Class

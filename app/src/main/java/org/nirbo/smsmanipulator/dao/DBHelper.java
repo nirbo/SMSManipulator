@@ -23,6 +23,10 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
     private Dao<Target, Integer> targetDao = null;
     private RuntimeExceptionDao<Target, Integer> targetRuntimeDao = null;
 
+    public DBHelper(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION, R.raw.ormlite_config);
+    }
+
     public DBHelper(Context context, String databaseName, SQLiteDatabase.CursorFactory factory, int databaseVersion, File configFile) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION, R.raw.ormlite_config);
     }

@@ -30,8 +30,9 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemClic
     String[] mSettingDescriptions;
     List<SettingsFragmentRow> itemsList;
 
+    public SettingsFragment() {
 
-    public SettingsFragment() {}
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
