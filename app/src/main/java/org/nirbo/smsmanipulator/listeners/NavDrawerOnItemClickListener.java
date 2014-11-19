@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import org.nirbo.smsmanipulator.MainActivity;
 import org.nirbo.smsmanipulator.R;
 import org.nirbo.smsmanipulator.fragments.HomeFragment;
 import org.nirbo.smsmanipulator.fragments.SettingsFragment;
@@ -39,6 +40,7 @@ public class NavDrawerOnItemClickListener implements AdapterView.OnItemClickList
     public void selectDrawerItem(int position, AdapterView<?> parent, View item) {
         Fragment fragment = null;
         String fragmentTag = null;
+        boolean addToBackStack = false;
         ListView drawerList = (ListView) parent.findViewById(R.id.drawer_list);
 
         switch (position) {
@@ -59,18 +61,13 @@ public class NavDrawerOnItemClickListener implements AdapterView.OnItemClickList
                 break;
         }
 
-        if (fragment != null) {
-            FragmentTransaction ft = fm.beginTransaction();
-            ft.setCustomAnimations(R.anim.fade_in_fragment, R.anim.fade_out_fragment);
-            ft.replace(R.id.main_container, fragment, fragmentTag);
-            ft.commit();
+        MainActivity.loadFragment(fragment, fragmentTag, addToBackStack);
 
-            item.setSelected(true);
-            drawerList.setSelection(position);
-            drawerList.setItemChecked(position, true);
-            mToolbar.setTitle(mDrawerEntries[position]);
-            mNavDrawer.closeDrawer(mContext.findViewById(R.id.drawer_list));
-        }
+        item.setSelected(true);
+        drawerList.setSelection(position);
+        drawerList.setItemChecked(position, true);
+        mToolbar.setTitle(mDrawerEntries[position]);
+        mNavDrawer.closeDrawer(mContext.findViewById(R.id.drawer_list));
     }
 
 

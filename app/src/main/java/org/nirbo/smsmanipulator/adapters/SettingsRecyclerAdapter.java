@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.nirbo.smsmanipulator.MainActivity;
 import org.nirbo.smsmanipulator.R;
 import org.nirbo.smsmanipulator.UI.SettingsFragmentRow;
 import org.nirbo.smsmanipulator.fragments.TargetsFragment;
@@ -37,6 +38,7 @@ public class SettingsRecyclerAdapter extends RecyclerView.Adapter<SettingsRecycl
 
             Fragment fragment = null;
             String fragmentTag = null;
+            boolean addToBackStack = false;
 
             @Override
             public void OnItemClick(View item, int position) {
@@ -44,6 +46,7 @@ public class SettingsRecyclerAdapter extends RecyclerView.Adapter<SettingsRecycl
                     case 0:
                         fragment = new TargetsFragment();
                         fragmentTag = TargetsFragment.FRAGMENT_TAG;
+                        addToBackStack = true;
 
                     case 1:
                         break;
@@ -52,7 +55,7 @@ public class SettingsRecyclerAdapter extends RecyclerView.Adapter<SettingsRecycl
                         break;
                 }
 
-                loadTargetsFragment(fragment, fragmentTag);
+                MainActivity.loadFragment(fragment, fragmentTag, addToBackStack);
                 Toast.makeText(mContext, "Item Clicked: " + position, Toast.LENGTH_SHORT).show();
             }
         });
@@ -70,16 +73,6 @@ public class SettingsRecyclerAdapter extends RecyclerView.Adapter<SettingsRecycl
     @Override
     public int getItemCount() {
         return mSettingsRows.size();
-    }
-
-    public void loadTargetsFragment(Fragment fragment, String fragmentTag) {
-        if (fragment != null) {
-            FragmentManager fm = mContext.getFragmentManager();
-            FragmentTransaction ft = fm.beginTransaction();
-            ft.setCustomAnimations(R.anim.fade_in_fragment, R.anim.fade_out_fragment);
-            ft.replace(R.id.main_container, fragment, fragmentTag);
-            ft.commit();
-        }
     }
 
     // ViewHolder Class

@@ -1,6 +1,8 @@
 package org.nirbo.smsmanipulator;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -31,7 +33,7 @@ public class MainActivity extends ActionBarActivity {
     private String[] mDrawerEntries;
     private NavDrawerOnItemClickListener mNavDrawerItemListener;
     private ActionBarDrawerToggle mDrawerListener;
-    private FragmentManager fm;
+    private static FragmentManager fm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,10 +78,20 @@ public class MainActivity extends ActionBarActivity {
         mDrawerLayout.setDrawerListener(mDrawerListener);
     }
 
+    public static void loadFragment(Fragment fragment, String fragmentTag, boolean addToBackStack) {
+        if (fragment != null) {
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.setCustomAnimations(R.anim.fade_in_fragment, R.anim.fade_out_fragment);
+            ft.replace(R.id.main_container, fragment, fragmentTag);
+            if (addToBackStack) {
+                ft.addToBackStack(fragmentTag);
+            }
+            ft.commit();
+        }
+    }
+
     private void initHomeFragment() {
-        getFragmentManager().beginTransaction()
-                .add(R.id.main_container, new HomeFragment(), HomeFragment.FRAGMENT_TAG)
-                .commit();
+        loadFragment(new HomeFragment(), HomeFragment.FRAGMENT_TAG, false);
     }
 
     private DBHelper getDBHelper() {
