@@ -39,6 +39,7 @@ public class SettingsRecyclerAdapter extends RecyclerView.Adapter<SettingsRecycl
             Fragment fragment = null;
             String fragmentTag = null;
             boolean addToBackStack = false;
+            String toolbarTitle = null;
 
             @Override
             public void OnItemClick(View item, int position) {
@@ -47,6 +48,7 @@ public class SettingsRecyclerAdapter extends RecyclerView.Adapter<SettingsRecycl
                         fragment = new TargetsFragment();
                         fragmentTag = TargetsFragment.FRAGMENT_TAG;
                         addToBackStack = true;
+                        toolbarTitle = "Forwarding Targets";
 
                     case 1:
                         break;
@@ -55,7 +57,7 @@ public class SettingsRecyclerAdapter extends RecyclerView.Adapter<SettingsRecycl
                         break;
                 }
 
-                MainActivity.loadFragment(fragment, fragmentTag, addToBackStack);
+                MainActivity.loadFragment(fragment, fragmentTag, addToBackStack, toolbarTitle);
                 Toast.makeText(mContext, "Item Clicked: " + position, Toast.LENGTH_SHORT).show();
             }
         });

@@ -27,7 +27,7 @@ public class MainActivity extends ActionBarActivity {
 
     public static DBHelper dbHelper;
 
-    private Toolbar mToolbar;
+    private static Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerListView;
     private String[] mDrawerEntries;
@@ -78,7 +78,7 @@ public class MainActivity extends ActionBarActivity {
         mDrawerLayout.setDrawerListener(mDrawerListener);
     }
 
-    public static void loadFragment(Fragment fragment, String fragmentTag, boolean addToBackStack) {
+    public static void loadFragment(Fragment fragment, String fragmentTag, boolean addToBackStack, String toolbarTitle) {
         if (fragment != null) {
             FragmentTransaction ft = fm.beginTransaction();
             ft.setCustomAnimations(R.anim.fade_in_fragment, R.anim.fade_out_fragment);
@@ -87,11 +87,13 @@ public class MainActivity extends ActionBarActivity {
                 ft.addToBackStack(fragmentTag);
             }
             ft.commit();
+
+            mToolbar.setTitle(toolbarTitle);
         }
     }
 
     private void initHomeFragment() {
-        loadFragment(new HomeFragment(), HomeFragment.FRAGMENT_TAG, false);
+        loadFragment(new HomeFragment(), HomeFragment.FRAGMENT_TAG, false, "Home");
     }
 
     private DBHelper getDBHelper() {

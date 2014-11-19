@@ -41,17 +41,20 @@ public class NavDrawerOnItemClickListener implements AdapterView.OnItemClickList
         Fragment fragment = null;
         String fragmentTag = null;
         boolean addToBackStack = false;
+        String toolbarTitle = null;
         ListView drawerList = (ListView) parent.findViewById(R.id.drawer_list);
 
         switch (position) {
             case 0:
                 fragment = new HomeFragment();
                 fragmentTag = HomeFragment.FRAGMENT_TAG;
+                toolbarTitle = "Home";
                 break;
 
             case 1:
                 fragment = new SettingsFragment();
                 fragmentTag = SettingsFragment.FRAGMENT_TAG;
+                toolbarTitle = "Settings";
                 break;
 
             case 2:
@@ -61,7 +64,7 @@ public class NavDrawerOnItemClickListener implements AdapterView.OnItemClickList
                 break;
         }
 
-        MainActivity.loadFragment(fragment, fragmentTag, addToBackStack);
+        MainActivity.loadFragment(fragment, fragmentTag, addToBackStack, toolbarTitle);
 
         item.setSelected(true);
         drawerList.setSelection(position);
